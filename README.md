@@ -126,16 +126,7 @@ The brief noted: *"The hypotheses that did not pan out tell us more about how yo
 
 ---
 
-## 5. What We Would Do With Two More Days
-
-1. **Persistent Favourites Microservice**: Since `/v1/favourites` returns 404, implement a small edge KV or serverless database (Vercel KV / Supabase) to sync user favourites across devices rather than relying on browser `localStorage`.
-2. **Interactive Map Exploration**: Integrate Leaflet / Mapbox using the validated latitude and longitude coordinates, with bounding-box spatial clustering for Mumbai's micro-markets.
-3. **Automated Data Quality Pipeline**: Build a real-time ingestion validator using Zod schemas that automatically flags and quarantines corrupt records (negative prices, swapped coordinates) upon ingest.
-4. **Historical Price Trend Charts**: Visualize price per sq.ft distributions over time across Mumbai localities using Chart.js or Recharts.
-
----
-
-## 6. AI Tool Disclosure
+## 5. AI Tool Disclosure
 
 In accordance with the instructions:
 - **Tools Used**: Google Antigravity (Advanced Agentic Pair Programming Environment).
