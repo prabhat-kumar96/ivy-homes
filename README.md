@@ -1,4 +1,4 @@
-# Ivy Homes — Software Engineering Internship Submission (Mumbai)
+# Ivy Homes — Assignment Submission (Mumbai)
 
 **Candidate**: Prabhat Kumar  
 **GitHub**: [github.com/prabhat-kumar96](https://github.com/prabhat-kumar96)  
