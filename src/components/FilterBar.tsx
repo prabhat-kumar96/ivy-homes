@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 
@@ -50,19 +50,30 @@ export function FilterBar({ onFilter, initialFilters = {} }: FilterBarProps) {
   };
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
-      <h3 className="text-sm font-semibold text-gray-700 mb-3">Filters</h3>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+    <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
+      <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+        <h3 className="text-sm font-bold text-slate-800 flex items-center gap-2">
+          <span>🔍</span> Filter Properties
+        </h3>
+        <button
+          onClick={handleReset}
+          className="text-xs font-semibold text-slate-500 hover:text-slate-800 transition-colors"
+        >
+          Reset All
+        </button>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5">
         {/* Locality */}
         <div className="lg:col-span-2">
-          <label className="block text-xs text-gray-500 mb-1">Locality</label>
+          <label className="block text-xs font-semibold text-slate-600 mb-1.5">Locality</label>
           <input
             type="text"
             list="locality-options"
             value={locality}
             onChange={e => setLocality(e.target.value)}
-            placeholder="e.g. mulund west"
-            className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+            placeholder="e.g. mulund west, bandra"
+            className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-3 py-2 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400"
           />
           <datalist id="locality-options">
             {LOCALITIES.map(l => <option key={l} value={l} />)}
@@ -71,81 +82,72 @@ export function FilterBar({ onFilter, initialFilters = {} }: FilterBarProps) {
 
         {/* BHK */}
         <div>
-          <label className="block text-xs text-gray-500 mb-1">BHK</label>
+          <label className="block text-xs font-semibold text-slate-600 mb-1.5">Bedrooms</label>
           <select
             value={bhk}
             onChange={e => setBhk(e.target.value)}
-            className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-3 py-2 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
           >
-            <option value="">Any</option>
+            <option value="">Any BHK</option>
             {[1, 2, 3, 4, 5].map(n => <option key={n} value={n}>{n} BHK</option>)}
           </select>
         </div>
 
         {/* Property Type */}
         <div>
-          <label className="block text-xs text-gray-500 mb-1">Type</label>
+          <label className="block text-xs font-semibold text-slate-600 mb-1.5">Type</label>
           <select
             value={propertyType}
             onChange={e => setPropertyType(e.target.value)}
-            className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-3 py-2 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
           >
-            {PROPERTY_TYPES.map(t => <option key={t} value={t}>{t || 'Any'}</option>)}
+            {PROPERTY_TYPES.map(t => <option key={t} value={t}>{t ? t.charAt(0).toUpperCase() + t.slice(1) : 'Any Type'}</option>)}
           </select>
         </div>
 
         {/* Furnishing */}
         <div>
-          <label className="block text-xs text-gray-500 mb-1">Furnishing</label>
+          <label className="block text-xs font-semibold text-slate-600 mb-1.5">Furnishing</label>
           <select
             value={furnishing}
             onChange={e => setFurnishing(e.target.value)}
-            className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-3 py-2 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
           >
             {FURNISHINGS.map(f => (
-              <option key={f} value={f}>{f || 'Any'}</option>
+              <option key={f} value={f}>{f ? f.charAt(0).toUpperCase() + f.slice(1) : 'Any'}</option>
             ))}
           </select>
         </div>
 
-        {/* Price range */}
-        <div className="lg:col-span-2 grid grid-cols-2 gap-2">
-          <div>
-            <label className="block text-xs text-gray-500 mb-1">Min Price (₹)</label>
-            <input
-              type="number"
-              value={minPrice}
-              onChange={e => setMinPrice(e.target.value)}
-              placeholder="0"
-              className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
-          <div>
-            <label className="block text-xs text-gray-500 mb-1">Max Price (₹)</label>
-            <input
-              type="number"
-              value={maxPrice}
-              onChange={e => setMaxPrice(e.target.value)}
-              placeholder="No limit"
-              className="w-full border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+        {/* Min Price */}
+        <div>
+          <label className="block text-xs font-semibold text-slate-600 mb-1.5">Min Price (₹)</label>
+          <input
+            type="number"
+            value={minPrice}
+            onChange={e => setMinPrice(e.target.value)}
+            placeholder="₹ Min"
+            className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-3 py-2 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400"
+          />
         </div>
       </div>
 
-      <div className="flex gap-2 mt-3">
-        <button
-          onClick={handleApply}
-          className="bg-blue-600 text-white px-4 py-1.5 rounded text-sm font-medium hover:bg-blue-700 transition-colors"
-        >
-          Apply Filters
-        </button>
-        <button
-          onClick={handleReset}
-          className="bg-gray-100 text-gray-700 px-4 py-1.5 rounded text-sm font-medium hover:bg-gray-200 transition-colors"
-        >
-          Reset
-        </button>
+      <div className="flex items-center justify-between pt-2">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={handleApply}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl text-sm font-semibold shadow-sm transition-all flex items-center gap-1.5"
+          >
+            <span>Apply Filters</span>
+          </button>
+          <button
+            onClick={handleReset}
+            className="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-xl text-sm font-medium transition-all"
+          >
+            Clear
+          </button>
+        </div>
+        <p className="text-xs text-slate-400 hidden sm:block">Client-side verified filtering enabled</p>
       </div>
     </div>
   );

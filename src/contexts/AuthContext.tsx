@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from 'react';
 import { loadSession, saveSession, clearSession, getValidToken, doLogin, doLogout, type Session } from '@/lib/auth';
@@ -8,6 +8,7 @@ interface AuthContextType {
   token: string | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
+  switchAccount: (email: string) => Promise<void>;
   logout: () => Promise<void>;
   refreshIfNeeded: () => Promise<string | null>;
 }
@@ -19,14 +20,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Load session on mount
+  // Initialize session on mount: load stored or auto-login demo1 for seamless demo experience
   useEffect(() => {
-    const stored = loadSession();
-    if (stored) {
-      setSession(stored);
-      setToken(stored.accessToken);
+    async function initAuth() {
+      const stored = loadSession();
+      if (stored) {
+        setSession(stored);
+        setToken(stored.accessToken);
+        setIsLoading(false);
+        return;
+      }
+
+      // Check if user explicitly logged out
+      const explicitLogout = typeof window !== 'undefined' && localStorage.getItem('ivy_explicit_logout') === 'true';
+      if (!explicitLogout) {
+        try {
+          const autoSession = await doLogin('demo1@ivy.homes', 'fc3a4005e1');
+          setSession(autoSession);
+          setToken(autoSession.accessToken);
+        } catch (e) {
+          console.error('Auto-login demo account failed:', e);
+        }
+      }
+      setIsLoading(false);
     }
-    setIsLoading(false);
+    initAuth();
   }, []);
 
   // Auto-refresh token before it expires
@@ -49,13 +67,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [session]);
 
   const login = useCallback(async (email: string, password: string) => {
-    const newSession = await doLogin(email, password);
-    setSession(newSession);
-    setToken(newSession.accessToken);
+    setIsLoading(true);
+    try {
+      const newSession = await doLogin(email, password);
+      if (typeof window !== 'undefined') localStorage.removeItem('ivy_explicit_logout');
+      setSession(newSession);
+      setToken(newSession.accessToken);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  const switchAccount = useCallback(async (email: string) => {
+    setIsLoading(true);
+    try {
+      const newSession = await doLogin(email, 'fc3a4005e1');
+      if (typeof window !== 'undefined') localStorage.removeItem('ivy_explicit_logout');
+      setSession(newSession);
+      setToken(newSession.accessToken);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
   const logout = useCallback(async () => {
-    if (token) await doLogout(token);
+    if (token) await doLogout(token).catch(() => {});
+    clearSession();
+    if (typeof window !== 'undefined') localStorage.setItem('ivy_explicit_logout', 'true');
     setSession(null);
     setToken(null);
   }, [token]);
@@ -71,7 +109,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [token]);
 
   return (
-    <AuthContext.Provider value={{ session, token, isLoading, login, logout, refreshIfNeeded }}>
+    <AuthContext.Provider value={{ session, token, isLoading, login, switchAccount, logout, refreshIfNeeded }}>
       {children}
     </AuthContext.Provider>
   );
