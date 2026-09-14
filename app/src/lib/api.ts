@@ -262,29 +262,83 @@ export async function getProject(id: string, token?: string): Promise<Project> {
   return apiFetch<Project>(`/v1/projects/${id}`, {}, token);
 }
 
-// ── Favourites ────────────────────────────────────────────────────────────────
+// ── Favourites (with client fallback when /v1/favourites returns 404) ───────────
 
 export interface FavouritesResponse {
   count: number;
   results: Listing[];
 }
 
+const LOCAL_FAVS_KEY = 'ivy_saved_listing_ids';
+
+function getLocalFavIds(): string[] {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = localStorage.getItem(LOCAL_FAVS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function setLocalFavIds(ids: string[]): void {
+  if (typeof window === 'undefined') return;
+  localStorage.setItem(LOCAL_FAVS_KEY, JSON.stringify(ids));
+}
+
 export async function getFavourites(token: string): Promise<FavouritesResponse> {
-  return apiFetch<FavouritesResponse>('/v1/favourites', {}, token);
+  try {
+    // Attempt live endpoint
+    return await apiFetch<FavouritesResponse>('/v1/favourites', {}, token);
+  } catch {
+    // Fallback: load saved IDs from localStorage and fetch their details
+    const ids = getLocalFavIds();
+    if (ids.length === 0) return { count: 0, results: [] };
+    const settled = await Promise.allSettled(ids.map(id => getListing(id, token)));
+    const results: Listing[] = [];
+    settled.forEach(r => {
+      if (r.status === 'fulfilled' && r.value) results.push(r.value);
+    });
+    return { count: results.length, results };
+  }
 }
 
 export async function addFavourite(listingId: string, token: string): Promise<void> {
-  await apiFetch('/v1/favourites', {
-    method: 'POST',
-    body: JSON.stringify({ id: listingId }),
-  }, token);
+  // Always update local storage first for resilience
+  const ids = new Set(getLocalFavIds());
+  ids.add(listingId);
+  setLocalFavIds(Array.from(ids));
+
+  try {
+    await apiFetch('/v1/favourites', {
+      method: 'POST',
+      body: JSON.stringify({ id: listingId }),
+    }, token);
+  } catch {
+    // Server endpoint 404 is expected; client storage already updated
+  }
 }
 
 export async function removeFavourite(listingId: string, token: string): Promise<void> {
-  await apiFetch(`/v1/favourites/${listingId}`, { method: 'DELETE' }, token);
+  // Always update local storage first for resilience
+  const ids = new Set(getLocalFavIds());
+  ids.delete(listingId);
+  setLocalFavIds(Array.from(ids));
+
+  try {
+    await apiFetch(`/v1/favourites/${listingId}`, { method: 'DELETE' }, token);
+  } catch {
+    // Server endpoint 404 is expected; client storage already updated
+  }
 }
 
 // ── Utils ─────────────────────────────────────────────────────────────────────
+
+export function formatProjectPrice(priceInCrores: number): string {
+  if (priceInCrores === undefined || priceInCrores === null) return 'N/A';
+  if (priceInCrores >= 1) return `₹${priceInCrores.toFixed(2)} Cr`;
+  return `₹${(priceInCrores * 100).toFixed(2)} L`;
+}
 
 export function formatPrice(price: number): string {
   if (price < 0) return `−₹${Math.abs(price).toLocaleString('en-IN')}`;

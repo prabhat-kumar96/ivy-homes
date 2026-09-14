@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { getProjects, formatPrice, type Project, type ProjectFilters } from '@/lib/api';
+import { getProjects, formatPrice, formatProjectPrice, type Project, type ProjectFilters } from '@/lib/api';
 import Link from 'next/link';
 
 const PAGE_SIZE = 20;
@@ -132,7 +132,7 @@ export default function ProjectsPage() {
                 {/* price_min and price_max are in rupees — verified */}
                 <div>
                   <p className="text-xs text-gray-500">Price Range</p>
-                  <p className="font-medium">{formatPrice(proj.price_min)} – {formatPrice(proj.price_max)}</p>
+                  <p className="font-medium">{formatProjectPrice(proj.price_min)} – {formatProjectPrice(proj.price_max)}</p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Area Range</p>

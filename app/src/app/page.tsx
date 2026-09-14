@@ -71,11 +71,8 @@ export default function HomePage() {
     if (sortBy) serverFilters.sort_by = sortBy;
     serverFilters.order = order;
 
-    // Store remaining for client-side filtering (in case server ignores any params)
-    setClientFilters({
-      min_price: filters.min_price,
-      max_price: filters.max_price,
-    });
+    // Store all filters for client-side filtering (defense in depth if server ignores any params)
+    setClientFilters({ ...filters });
 
     setPage(1);
     fetchListings(1, serverFilters);
@@ -85,9 +82,25 @@ export default function HomePage() {
   useEffect(() => {
     let result = [...listings];
 
-    // Client-side price filtering (insurance)
-    if (clientFilters.min_price) result = result.filter(l => l.price >= Number(clientFilters.min_price));
-    if (clientFilters.max_price) result = result.filter(l => l.price <= Number(clientFilters.max_price));
+    if (clientFilters.locality) {
+      const loc = String(clientFilters.locality).toLowerCase().trim();
+      result = result.filter(l => (l.locality || '').toLowerCase().includes(loc));
+    }
+    if (clientFilters.bhk !== undefined && clientFilters.bhk !== '') {
+      result = result.filter(l => l.bedroom === Number(clientFilters.bhk));
+    }
+    if (clientFilters.property_type) {
+      result = result.filter(l => (l.property_type || '').toLowerCase() === String(clientFilters.property_type).toLowerCase());
+    }
+    if (clientFilters.furnishing) {
+      result = result.filter(l => (l.furnishing || '').toLowerCase() === String(clientFilters.furnishing).toLowerCase());
+    }
+    if (clientFilters.min_price) {
+      result = result.filter(l => l.price >= Number(clientFilters.min_price));
+    }
+    if (clientFilters.max_price) {
+      result = result.filter(l => l.price <= Number(clientFilters.max_price));
+    }
 
     // Client-side sort (since server sort is broken)
     if (sortBy) {

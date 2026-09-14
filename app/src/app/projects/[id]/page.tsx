@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import { getProject, getListings, formatPrice, type Project, type Listing } from '@/lib/api';
+import { getProject, getListings, formatPrice, formatProjectPrice, type Project, type Listing } from '@/lib/api';
 import Link from 'next/link';
 import { ListingCard } from '@/components/ListingCard';
 
@@ -70,7 +70,7 @@ export default function ProjectDetailPage() {
                 project.project_status === 'ready to move' ? 'bg-green-500' :
                 project.project_status === 'under construction' ? 'bg-amber-500' : 'bg-blue-500'
               }`}>{project.project_status}</span>
-              <div className="text-2xl font-bold mt-2">{formatPrice(project.price_min)} – {formatPrice(project.price_max)}</div>
+              <div className="text-2xl font-bold mt-2">{formatProjectPrice(project.price_min)} – {formatProjectPrice(project.price_max)}</div>
             </div>
           </div>
         </div>
