@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -165,27 +165,24 @@ export default function HomePage() {
     );
   }
 
-  // If user explicitly signed out, show elegant 1-click login hero
+  // If user explicitly signed out, show clean login selection
   if (!session) {
     return (
-      <div className="max-w-4xl mx-auto py-12 text-center space-y-8">
+      <div className="max-w-4xl mx-auto py-16 text-center space-y-8">
         <div className="space-y-3">
-          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 px-3 py-1 rounded-full text-xs font-semibold text-blue-700">
-            <span>🔒</span> Authentication Required by Live API
-          </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Sign In to Explore Mumbai Real Estate
+            Welcome to Ivy Homes Mumbai
           </h1>
           <p className="text-slate-600 max-w-lg mx-auto text-sm sm:text-base">
-            Select one of the three evaluator demo accounts to sign in with one click:
+            Select an account to start browsing verified properties:
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left max-w-2xl mx-auto">
           {[
-            { email: 'demo1@ivy.homes', label: 'Demo Account 1', role: 'Primary Reviewer' },
-            { email: 'demo2@ivy.homes', label: 'Demo Account 2', role: 'Secondary Auditor' },
-            { email: 'demo3@ivy.homes', label: 'Demo Account 3', role: 'QA Inspector' },
+            { email: 'demo1@ivy.homes', label: 'Demo Account 1' },
+            { email: 'demo2@ivy.homes', label: 'Demo Account 2' },
+            { email: 'demo3@ivy.homes', label: 'Demo Account 3' },
           ].map(account => (
             <button
               key={account.email}
@@ -196,10 +193,9 @@ export default function HomePage() {
                 👤
               </div>
               <p className="font-bold text-slate-900 text-sm">{account.label}</p>
-              <p className="text-xs text-blue-600 font-mono mt-0.5">{account.email}</p>
-              <p className="text-[11px] text-slate-400 mt-2 font-medium">{account.role}</p>
+              <p className="text-xs text-slate-500 font-mono mt-0.5">{account.email}</p>
               <div className="mt-4 text-xs font-bold text-blue-600 group-hover:text-blue-700 flex items-center gap-1">
-                <span>Sign In Instantly</span> →
+                <span>Sign In</span> →
               </div>
             </button>
           ))}
@@ -258,11 +254,6 @@ export default function HomePage() {
             <option value="asc">Low → High</option>
             <option value="desc">High → Low</option>
           </select>
-          {sortBy && (
-            <span className="hidden md:inline-block text-[11px] text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-md font-medium">
-              Client-side sort active
-            </span>
-          )}
         </div>
 
         <div className="text-xs text-slate-500 font-medium">

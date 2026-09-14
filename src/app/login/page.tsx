@@ -45,33 +45,32 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-[75vh] flex items-center justify-center px-4 py-8">
-      <div className="bg-white rounded-3xl shadow-xl border border-slate-200 p-8 sm:p-10 w-full max-w-lg space-y-6">
+      <div className="bg-white rounded-3xl shadow-xl border border-slate-200 p-8 sm:p-10 w-full max-w-md space-y-6">
         <div className="text-center space-y-2">
           <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white text-2xl flex items-center justify-center mx-auto shadow-sm">
             🏡
           </div>
           <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Sign In to Ivy Homes</h1>
-          <p className="text-xs text-slate-500">Access verified Mumbai real estate datasets & intelligence</p>
+          <p className="text-xs text-slate-500">Access verified Mumbai real estate market listings</p>
         </div>
 
-        {/* 1-Click Demo Login Cards */}
-        <div className="space-y-2 pt-2">
-          <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Quick Sign-In (Demo Accounts)</p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+        {/* Quick Demo Logins */}
+        <div className="space-y-2">
+          <p className="text-xs font-semibold text-slate-500">Quick demo access:</p>
+          <div className="grid grid-cols-3 gap-2">
             {[
-              { email: 'demo1@ivy.homes', label: 'Demo 1', role: 'Reviewer' },
-              { email: 'demo2@ivy.homes', label: 'Demo 2', role: 'Auditor' },
-              { email: 'demo3@ivy.homes', label: 'Demo 3', role: 'QA' },
+              { email: 'demo1@ivy.homes', label: 'Demo 1' },
+              { email: 'demo2@ivy.homes', label: 'Demo 2' },
+              { email: 'demo3@ivy.homes', label: 'Demo 3' },
             ].map(d => (
               <button
                 key={d.email}
                 type="button"
                 onClick={() => handleQuickLogin(d.email)}
                 disabled={isLoading}
-                className="p-3 bg-slate-50 hover:bg-blue-50/60 border border-slate-200 hover:border-blue-300 rounded-xl text-left transition-all group"
+                className="py-2 px-2 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-xl text-center transition-all text-xs font-semibold text-slate-700 hover:text-blue-600"
               >
-                <p className="text-xs font-bold text-slate-800 group-hover:text-blue-600">{d.label}</p>
-                <p className="text-[10px] text-slate-400 font-mono truncate">{d.email}</p>
+                {d.label}
               </button>
             ))}
           </div>
@@ -79,17 +78,17 @@ export default function LoginPage() {
 
         <div className="relative flex items-center justify-center">
           <div className="border-t border-slate-200 w-full" />
-          <span className="bg-white px-3 text-xs text-slate-400 uppercase font-bold">Or enter credentials</span>
+          <span className="bg-white px-3 text-[11px] text-slate-400 uppercase font-semibold">Or enter email</span>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Email Address</label>
+            <label className="block text-xs font-semibold text-slate-700 mb-1">Email</label>
             <input
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              placeholder="demo1@ivy.homes"
+              placeholder="name@example.com"
               required
               className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-3.5 py-2.5 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
             />
@@ -101,14 +100,14 @@ export default function LoginPage() {
               type="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
-              placeholder="Enter password"
+              placeholder="••••••••"
               required
               className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl px-3.5 py-2.5 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
             />
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-xl p-3.5 text-xs text-red-700 font-medium">
+            <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-xs text-red-700 font-medium">
               ⚠️ {error}
             </div>
           )}
@@ -121,12 +120,6 @@ export default function LoginPage() {
             {isLoading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
-
-        <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 text-xs text-slate-500 space-y-1">
-          <p className="font-semibold text-slate-700">📌 Authentication Notes:</p>
-          <p>• Bearer token expires in 15 minutes (auto-refreshes in background via <code>/auth/refresh</code>).</p>
-          <p>• All 3 demo accounts share the password: <code className="font-mono bg-white px-1.5 py-0.5 rounded border border-slate-200">fc3a4005e1</code></p>
-        </div>
       </div>
     </div>
   );

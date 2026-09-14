@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 
@@ -147,7 +147,6 @@ export function FilterBar({ onFilter, initialFilters = {} }: FilterBarProps) {
             Clear
           </button>
         </div>
-        <p className="text-xs text-slate-400 hidden sm:block">Client-side verified filtering enabled</p>
       </div>
     </div>
   );

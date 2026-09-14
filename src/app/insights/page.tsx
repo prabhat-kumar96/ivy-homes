@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 // Insights page — shows API analytics + data quality discoveries matching submission.json exactly
 import Link from 'next/link';
@@ -229,9 +229,9 @@ export default function InsightsPage() {
   return (
     <div className="space-y-8 max-w-5xl mx-auto">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Data Insights & Hostile Audit Verification</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Data Insights & Platform Analytics</h1>
         <p className="text-gray-500 mt-1">
-          Complete verified answers (Q1–Q10) and 19 empirical API findings across all 13 categories.
+          Verified market analytics, dataset benchmarks (Q1–Q10), and 19 empirical API findings across all 13 categories.
         </p>
       </div>
 
@@ -246,7 +246,7 @@ export default function InsightsPage() {
       {/* Verified Answers Scorecard (Q1-Q10) */}
       <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
         <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-          <span>🎯</span> Verified Answers (Q1–Q10) — 100% Confirmed
+          <span>🎯</span> Verified Market & Dataset Benchmarks (Q1–Q10)
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
           <div className="p-3 bg-blue-50/50 rounded-lg border border-blue-100">
