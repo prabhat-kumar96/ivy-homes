@@ -1,0 +1,23 @@
+{
+  "post": {
+    "status": 404,
+    "body": {
+      "detail": "Not Found"
+    }
+  },
+  "get": {
+    "status": 404,
+    "keys": [
+      "detail"
+    ]
+  },
+  "delete": {
+    "status": 404,
+    "body": {
+      "detail": "Not Found"
+    }
+  },
+  "get_after_delete": {
+    "status": 404
+  }
+}

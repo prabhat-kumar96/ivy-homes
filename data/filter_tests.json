@@ -1,0 +1,148 @@
+{
+  "baseTotal": 4755,
+  "locality=mulund+west": {
+    "total": 460,
+    "filtered": true,
+    "status": 200
+  },
+  "locality=andheri+east": {
+    "total": 0,
+    "filtered": true,
+    "status": 200
+  },
+  "bhk=1": {
+    "total": 355,
+    "filtered": true,
+    "status": 200
+  },
+  "bhk=2": {
+    "total": 1558,
+    "filtered": true,
+    "status": 200
+  },
+  "bhk=3": {
+    "total": 1742,
+    "filtered": true,
+    "status": 200
+  },
+  "bhk=4": {
+    "total": 674,
+    "filtered": true,
+    "status": 200
+  },
+  "property_type=apartment": {
+    "total": 3483,
+    "filtered": true,
+    "status": 200
+  },
+  "property_type=villa": {
+    "total": 370,
+    "filtered": true,
+    "status": 200
+  },
+  "furnishing=unfurnished": {
+    "total": 1605,
+    "filtered": true,
+    "status": 200
+  },
+  "furnishing=semi-furnished": {
+    "total": 1618,
+    "filtered": true,
+    "status": 200
+  },
+  "furnishing=fully-furnished": {
+    "total": 1533,
+    "filtered": true,
+    "status": 200
+  },
+  "min_price=50000000": {
+    "total": 783,
+    "filtered": true,
+    "status": 200
+  },
+  "max_price=5000000": {
+    "total": 21,
+    "filtered": true,
+    "status": 200
+  },
+  "min_price=10000000&max_price=20000000": {
+    "total": 627,
+    "filtered": true,
+    "status": 200
+  },
+  "sort_price_asc": {
+    "values": [
+      -64640000,
+      -49920000,
+      -37710000,
+      -36020000,
+      -30560000,
+      -29900000,
+      -28040000,
+      -25580000,
+      -19820000,
+      -14420000
+    ],
+    "is_sorted": true
+  },
+  "sort_price_desc": {
+    "values": [
+      -64640000,
+      -49920000,
+      -37710000,
+      -36020000,
+      -30560000,
+      -29900000,
+      -28040000,
+      -25580000,
+      -19820000,
+      -14420000
+    ],
+    "is_sorted": false
+  },
+  "sort_carpet_area_asc": {
+    "values": [
+      31,
+      340,
+      32,
+      342,
+      32,
+      359,
+      359,
+      362,
+      34,
+      365
+    ],
+    "is_sorted": false
+  },
+  "sort_posted_at_desc": {
+    "values": [
+      "2026-01-13T04:02:00",
+      "2026-01-13T20:23:00",
+      "2026-01-13T21:22:00",
+      "2026-01-13T08:08:00",
+      "2026-01-13T02:57:00",
+      "2026-01-13T14:12:00",
+      "2026-01-13T07:12:00",
+      "2026-01-13T07:32:00",
+      "2026-01-13T11:05:00",
+      "2026-01-13T14:12:00"
+    ],
+    "is_sorted": false
+  },
+  "sort_bedroom_asc": {
+    "values": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "is_sorted": true
+  }
+}

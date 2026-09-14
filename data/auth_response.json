@@ -1,0 +1,10 @@
+{
+  "access_token": "eyJleHAiOjE3ODkzODUzNDAsImlhdCI6MTc4OTM4NDQ0MCwia2V5IjoiSVZZMjYtOTM1OTZBNDNGM0ZBIiwic3ViIjoiZGVtbzFAaXZ5LmhvbWVzIiwidHlwIjoiYWNjZXNzIn0.Sz4KYaPotrWsOz5PCNTEBcLqphbvu0OnAxdw6R9FNYw",
+  "refresh_token": "eyJleHAiOjE3ODk5ODkyNDAsImlhdCI6MTc4OTM4NDQ0MCwia2V5IjoiSVZZMjYtOTM1OTZBNDNGM0ZBIiwic3ViIjoiZGVtbzFAaXZ5LmhvbWVzIiwidHlwIjoicmVmcmVzaCJ9.0-f-3O-z_rTxS96adtPFntZJ6O7soocjWbRykjGtR5s",
+  "token_type": "Bearer",
+  "expires_in": 900,
+  "refresh_url": "/auth/refresh",
+  "user": {
+    "email": "demo1@ivy.homes"
+  }
+}

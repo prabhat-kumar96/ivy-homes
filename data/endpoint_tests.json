@@ -1,0 +1,157 @@
+{
+  "listing_singular_path": {
+    "method": "GET",
+    "path": "/v1/listing/SQU-5004678",
+    "status": 404,
+    "bodyKeys": [
+      "detail"
+    ],
+    "bodySnippet": "{\"detail\":\"Not Found\"}"
+  },
+  "listings_plural_path": {
+    "method": "GET",
+    "path": "/v1/listings/SQU-5004678",
+    "status": 200,
+    "bodyKeys": [
+      "listing_id",
+      "listing_url",
+      "website",
+      "city_id",
+      "apartment_name",
+      "locality",
+      "property_type",
+      "bedroom",
+      "bathroom",
+      "balcony",
+      "floor",
+      "total_floors",
+      "furnishing",
+      "facing_direction",
+      "covered_parking",
+      "price",
+      "carpet_area",
+      "super_built_up_area",
+      "latitude",
+      "longitude",
+      "posted_by",
+      "posted_by_name",
+      "posted_by_contact",
+      "project_id",
+      "is_verified",
+      "description",
+      "posted_at",
+      "is_live"
+    ],
+    "bodySnippet": "{\"listing_id\":\"SQU-5004678\",\"listing_url\":\"https://www.squarelane.com/property/5004678\",\"website\":\"squarelane\",\"city_id\":5,\"apartment_name\":\"assetz park\",\"locality\":\"kandivali east\",\"property_type\":\"apartment\",\"bedroom\":3,\"bathroom\":2,\"balcony\":1,\"floor\":8,\"total_floors\":16,\"furnishing\":\"fully-furni"
+  },
+  "listings_similar": {
+    "method": "GET",
+    "path": "/v1/listings/SQU-5004678/similar",
+    "status": 404,
+    "bodyKeys": [
+      "detail"
+    ],
+    "bodySnippet": "{\"detail\":\"Not Found\"}"
+  },
+  "rental_single": {
+    "method": "GET",
+    "path": "/v1/rentals/R5000001",
+    "status": 200,
+    "bodyKeys": [
+      "listing_id",
+      "listing_url",
+      "website",
+      "city_id",
+      "title",
+      "apartment_name",
+      "locality",
+      "property_type",
+      "bedroom",
+      "bathroom",
+      "floor",
+      "total_floors",
+      "furnishing",
+      "facing_direction",
+      "price",
+      "deposit",
+      "maintenance",
+      "carpet_area",
+      "super_builtup_area",
+      "latitude",
+      "longitude",
+      "posted_by",
+      "posted_by_name",
+      "posted_by_contact",
+      "description",
+      "posted_at",
+      "is_live"
+    ],
+    "bodySnippet": "{\"listing_id\":\"R5000001\",\"listing_url\":\"https://www.magichomes.com/rent/5000001\",\"website\":\"magichomes\",\"city_id\":5,\"title\":\"3 BHK for rent in Powai\",\"apartment_name\":\"Mantri Greens\",\"locality\":\"borivali west\",\"property_type\":\"apartment\",\"bedroom\":3,\"bathroom\":2,\"floor\":13,\"total_floors\":15,\"furnish"
+  },
+  "project_single": {
+    "method": "GET",
+    "path": "/v1/projects/P50001",
+    "status": 200,
+    "bodyKeys": [
+      "project_id",
+      "project_url",
+      "city_id",
+      "apartment_name",
+      "developer_name",
+      "locality",
+      "project_status",
+      "total_units",
+      "total_towers",
+      "total_floors",
+      "launch_date",
+      "possession_date",
+      "rera_number",
+      "min_area_sqft",
+      "max_area_sqft",
+      "amenities",
+      "latitude",
+      "longitude",
+      "total_listings",
+      "price_min",
+      "price_max"
+    ],
+    "bodySnippet": "{\"project_id\":\"P50001\",\"project_url\":\"https://www.ivy.homes/projects/50001\",\"city_id\":5,\"apartment_name\":\"Century Terraces\",\"developer_name\":\"Century\",\"locality\":\"powai\",\"project_status\":\"under construction\",\"total_units\":1330,\"total_towers\":16,\"total_floors\":9,\"launch_date\":\"2020-07-01\",\"possession"
+  },
+  "favourites_get": {
+    "method": "GET",
+    "path": "/v1/favourites",
+    "status": 404,
+    "bodyKeys": [
+      "detail"
+    ],
+    "bodySnippet": "{\"detail\":\"Not Found\"}"
+  },
+  "favourites_post": {
+    "method": "POST",
+    "path": "/v1/favourites",
+    "status": 404,
+    "bodyKeys": [
+      "detail"
+    ],
+    "bodySnippet": "{\"detail\":\"Not Found\"}"
+  },
+  "analytics_summary": {
+    "method": "GET",
+    "path": "/v1/analytics/summary",
+    "status": 404,
+    "bodyKeys": [
+      "detail"
+    ],
+    "bodySnippet": "{\"detail\":\"Not Found\"}"
+  },
+  "auth_logout": {
+    "method": "POST",
+    "path": "/auth/logout",
+    "status": 200,
+    "bodyKeys": [
+      "ok",
+      "note"
+    ],
+    "bodySnippet": "{\"ok\":true,\"note\":\"tokens are stateless; discard them client side\"}"
+  }
+}
